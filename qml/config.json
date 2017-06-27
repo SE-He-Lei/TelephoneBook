@@ -1,0 +1,8 @@
+{
+    "title": "TelephoneBook",
+    "identifier": "com.yourcompany.wizardEVAP.TelephoneBook",
+    "orientation": "auto",
+    "versioncode": 1,
+    "versionname": "1.0",
+    "stage": "test"
+}
