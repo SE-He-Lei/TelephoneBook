@@ -3,9 +3,6 @@ import VPlayApps 1.0
 import QtQuick.LocalStorage 2.0
 import "Database.js" as JS
 Item {
-
-
-
     anchors.fill: parent
 
     NavigationStack {
@@ -16,12 +13,10 @@ Item {
 //              title: "Contacts"
               SearchBar {
                 id: searchBar
-
                 onAccepted: {
 
                 }
               }
-
                  rightBarItem:IconButtonBarItem{
 
                icon:IconType.plus
@@ -131,9 +126,7 @@ Item {
              id:input
          }
      }
-
-
+    }
 }
 
-}
 
