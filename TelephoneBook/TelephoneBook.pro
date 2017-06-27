@@ -41,7 +41,6 @@ win32 {
 }
 macx {
     ICON = macx/app_icon.icns
-<<<<<<< HEAD
 }
 QT +=sql
 HEADERS +=
@@ -49,6 +48,3 @@ HEADERS +=
 DISTFILES += \
     qml/Database.js \
     qml/MyModel.qml
-=======
-}
->>>>>>> f1e3e1b9e080092f00ca859625cd3ac7effbad8c

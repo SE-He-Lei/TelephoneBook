@@ -8,6 +8,11 @@ ListModel {
 
         JS.dbReadAll()
 //        console.log(listModel.count)
+//        for(var i=0;i<26;i++){
+//            for(var j=0;j<listModel.count;j++){
+//                if()
+//            a}
+//        }
     }
 
 

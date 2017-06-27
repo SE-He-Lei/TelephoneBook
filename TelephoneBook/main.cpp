@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
 //    model->setData(1,"lucy");
 //    model->setQuery("select * ",db);
 
+
     // Use platform-specific fonts instead of V-Play's default font
     vplay.setPreservePlatformFonts(true);
 

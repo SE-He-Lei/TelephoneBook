@@ -3,12 +3,13 @@ import VPlayApps 1.0
 
 
 Item {
+    id: dialListPage
     anchors.fill: parent
 
 
     NavigationStack{
         id:stack
-         signal setphonenumber(string defaultphonenumber)
+        signal setphonenumber(string defaultphonenumber)
         ListPage{
             title: "Dial"
             id:page
@@ -66,6 +67,7 @@ Item {
                 }
 
                      }
+            KeyBoard{}
 
                  }
         Component{

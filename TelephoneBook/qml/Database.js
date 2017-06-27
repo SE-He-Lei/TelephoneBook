@@ -30,7 +30,7 @@ function dbInit()
     var db = LocalStorage.openDatabaseSync("LinkMan_DB", "", "LinkMan", 1000000)
     try {
         db.transaction(function (tx) {
-            tx.executeSql('CREATE TABLE IF NOT EXISTS linkman_log1 (name text,telephone text)')
+            tx.executeSql('CREATE TABLE IF NOT EXISTS linkman_logorder (name text,telephone text,type text)')
         })
     } catch (err) {
         console.log("Error creating table in database: " + err)
@@ -48,13 +48,13 @@ function dbGetHandle()
     return db
 }
 
-function dbInsert(Pname,Ptelephone)
+function dbInsert(Pname,Ptelephone,Ptype)
 {
     var db = dbGetHandle()
     var rowid = 0;
     db.transaction(function (tx) {
-        tx.executeSql('INSERT INTO linkman_log1 VALUES(?, ?)',
-                      [Pname, Ptelephone])
+        tx.executeSql('INSERT INTO linkman_logorder VALUES(?,?,?)',
+                      [Pname, Ptelephone,Ptype])
         var result = tx.executeSql('SELECT last_insert_rowid()')
         rowid = result.insertId
     })
@@ -67,14 +67,14 @@ function dbReadAll()
 
     db.transaction(function (tx) {
         var results = tx.executeSql(
-                    'SELECT rowid,name,telephone FROM linkman_log1 order by rowid desc')
+                    'SELECT rowid,name,telephone,type FROM linkman_logorder order by rowid desc')
         for (var i = 0; i < results.rows.length; i++) {
             listModel.append({
                                  id: results.rows.item(i).rowid,
-//                                 checked: " ",
+//                               checked: " ",
                                  name: results.rows.item(i).name,
-
-                                 telephone: results.rows.item(i).telephone
+                                 telephone: results.rows.item(i).telephone,
+                                 type:results.rows.item(i).type
 
                              })
         }
@@ -82,12 +82,12 @@ function dbReadAll()
     })
 }
 
-function dbUpdate(Pname, Ptelephone, Prowid)
+function dbUpdate(Pname, Ptelephone, Ptype)
 {
     var db = dbGetHandle()
     db.transaction(function (tx) {
-        tx.executeSql(
-                    'update linkman_log1 set name=?, telephone=? where rowid = ?', [Pname, Ptelephone,Prowid])
+       var results= tx.executeSql(
+                    'update linkman_logorder set name=?, telephone=? where type = ?', [Pname, Ptelephone,Ptype])
     })
 }
 
@@ -95,12 +95,12 @@ function dbDeleteRow(Prowid)
 {
     var db = dbGetHandle()
     db.transaction(function (tx) {
-        tx.executeSql('delete from linkman_log1 where Prowid = ?', [Prowid])
+        tx.executeSql('delete from linkman_logorder where Prowid = ?', [Prowid])
     })
 }
-//function dborder(Pfirstletter){
-//    var db=dbGetHandle()
-//    db.transaction(function (tx){
-//        tx.executeSql('select ')
-//    }
-//}
+function dbsearch(Ptype){
+    var db=dbGetHandle()
+    db.transaction(function (tx){
+        tx.executeSql('select from linkman_logorder where Ptype = ?',[Ptype])
+    })
+}

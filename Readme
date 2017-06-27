@@ -1,1 +1,1 @@
-在这个项目中我添加了数据库，并且用了JavaScript实现的，项目中包含了一个Database.js，里面有数据库的代码，使用了数据库后，在ListPage中用ListModel作为其Model，在ListModel中读取所有的存好的的数据，目前可以添加人到数据库中并显示，但还未对其进行分类排序，详情见代码。
+在此版本中在数据库存储的基础上，在ListPage中用ListModel作为其Model，在ListModel中读取所有的存好的的数据，可以添加人到数据库中并显示，对其进行分类排序，并设置了虚拟键盘。

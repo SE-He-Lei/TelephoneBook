@@ -10,11 +10,12 @@ Page {
         listPage.listView.model.setProperty(listPage.listView.currentIndex,"name",nameinput.text)
         listPage.listView.model.setProperty( listPage.listView.currentIndex, "telephone",
                                             numberinput.text)
-//        listPage.listView.model.setProperty(listPage.listView.currentIndex, "firstletter",nameinput.text.substring(0,1))
+        listPage.listView.model.setProperty(listPage.listView.currentIndex, "type",nameinput.text.substring(0,1).toUpperCase())
 
     }
     function insertrec() {
-        var rowid = parseInt(JS.dbInsert(nameinput.text,numberinput.text), 10)
+        var rowid = parseInt(JS.dbInsert(nameinput.text,numberinput.text,nameinput.text.substring(0,1)), 10)
+
         if (rowid) {
             listPage.listView.model.setProperty(listPage.listView.currentIndex, "id", rowid)
             listPage.listView.forceLayout()
@@ -25,10 +26,11 @@ Page {
     function editrec(Pname, Ptelephone) {
         nameinput.text = Pname
         numberinput.text = Ptelephone
+
     }
     function initrec_new(){
 
-        listPage.listView.model.insert(0,{name:"",telephone:""})
+        listPage.listView.model.insert(0,{name:"",telephone:"",type:""})
         listPage.listView.currentIndex=0
     }
 
@@ -57,11 +59,15 @@ Page {
                         initrec_new()
 
                         if(listPage.listView.currentIndex!=-1){
-                          if(listPage.listView.model.get(listPage.listView.currentIndex).id<1){
+
+//                          if(listPage.listView.model.get(listPage.listView.currentIndex).id<1){
+//                              console.log("hhh")
+
                           if(insertrec()){
 
                               setlistview()
-                          }
+
+//                          }
                         }
                        }
                         stack.pop(addlinkmanpage)
@@ -97,9 +103,9 @@ Page {
             }
         }
     }
-    Component.onCompleted: {
-        JS.dbInit()
-    }
+//    Component.onCompleted: {
+//        JS.dbInit()
+//    }
 }
 
 
