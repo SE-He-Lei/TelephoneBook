@@ -3,26 +3,27 @@ import VPlayApps 1.0
 import QtQuick.LocalStorage 2.0
 import "Database.js" as JS
 Item {
-    id: contact
     anchors.fill: parent
 
     NavigationStack {
         id:stack
         signal detailinfo(var index)
-        property int clickone
         splitView: tablet
         ListPage {
             id:listPage
-            // title: "Contacts"
-            SearchBar{
+            AppImage {
+                id: backgroundImage
+                anchors.fill: parent
+                defaultSource: "../assets/4.jpg"
+                opacity: 0.7
+            }
+//            opacity: 0.6
+            //              title: "Contacts"
+            SearchBar {
                 id: searchBar
+
                 onAccepted: {
 
-                    mymodel.clear()
-                    JS.dbsearch(text)
-                    if(!text){
-                        JS.dbReadAllagin()
-                    }
                 }
             }
 
@@ -30,9 +31,7 @@ Item {
 
                 icon:IconType.plus
                 onClicked: {
-                    //                    storedialog.open()
-                    stack.push(addlinkmanpage)
-
+                    storedialog.open()
                 }
             }
 
@@ -43,9 +42,11 @@ Item {
                 id:simplerow
                 text:name
                 detailText: telephone
-                onSelected:{
-                    stack.push(detailPageComponent)
+                onSelected: {
                     stack.detailinfo(index)
+
+                    stack.push(detailPageComponent)
+
                 }
             }
             section.property: "type"
@@ -56,48 +57,29 @@ Item {
                 target: listPage.listView
             }
 
-
-
-
             // page that will be displayed in the detail view when a list item is clicked
             Component {
                 id: detailPageComponent
+
+
                 Page {
                     Connections{
                         target: stack
+
                         onDetailinfo:{
-                            detailname.text=mymodel.get(index).name
-                            detailtelephone.text=mymodel.get(index).telephone
-                            stack.clickone=index
+                            console.log(index)
                         }
                     }
+
                     rightBarItem:TextButtonBarItem{
                         text:"OK"
                         onClicked: {
-                             if(detailname.text!==mymodel.get(stack.clickone).name||detailtelephone.text!==mymodel.get(stack.clickone).telephone
-                                     ) {
-                                 mymodel.get(stack.clickone).name=detailname.text
-                                 mymodel.get(stack.clickone).telephone=detailtelephone.text
-                                 JS.dbUpdate(detailname.text,detailtelephone.text,detailname.text.substring(0,1).toUpperCase(),mymodel.get(stack.clickone).id)
-
-                             }
-
                             stack.pop(detailPageComponent)
                         }
                     }
                     leftBarItem: TextButtonBarItem{
-                        id:deletebar
                         text:"Delete"
-
-                        onClicked:{
-
-                            JS.dbDeleteRow(mymodel.get(stack.clickone).id)
-                            mymodel.remove(stack.clickone,1)
-                            if(listPage.listView.count==0){
-
-                                listPage.listView.currentIndex=-1
-                            }
-                            stack.pop(detailPageComponent)
+                        onClicked: {
                         }
                     }
                     Column{
@@ -121,10 +103,31 @@ Item {
                             }
                             AppTextField{
                                 id:detailtelephone
-                                text:listPage.listView.model.get(listPage.listView.currentIndex).telephone
+                                text:""
                             }
                         }
                     }
+                }
+            }
+            Dialog{
+                id:storedialog
+                Column{
+                    AppCheckBox{
+                        id:phonestore
+                        icon:IconType.phone
+                        text:"PhoneStore"
+                    }
+                    AppCheckBox{
+                        id:cardstore
+                        icon:IconType.minuscircle
+                        text:"Cardstore"
+                    }
+                }
+                onCanceled: storedialog.close()
+                onAccepted: {
+                    storedialog.close()
+                    stack.push(addlinkmanpage)
+
                 }
             }
 

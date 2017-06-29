@@ -1,4 +1,5 @@
 import VPlayApps 1.0
+
 Page {
     property alias childNavigationStack: globalNavStack
     property alias navigation: navigation
@@ -7,22 +8,17 @@ Page {
         id: globalNavStack
 
         Page {
-
             navigationBarHidden: true
-
-
-
             Navigation {
                 id: navigation
-
                 navigationMode:
                     navigationModeTabs
 
                 NavigationItem {
                     title: qsTr("Dial")
                     icon: IconType.phone
-                    DialListPage{}
 
+                    DialListPage{}
                 }
 
                 NavigationItem {

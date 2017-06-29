@@ -67,7 +67,7 @@ function dbReadAll()
 
     db.transaction(function (tx) {
         var results = tx.executeSql(
-                    'SELECT rowid,name,telephone,type FROM linkman_logorder order by type desc')
+                    'SELECT rowid,name,telephone,type FROM linkman_logorder order by rowid desc')
         for (var i = 0; i < results.rows.length; i++) {
             listModel.append({
                                  id: results.rows.item(i).rowid,
@@ -82,57 +82,25 @@ function dbReadAll()
     })
 }
 
-function dbUpdate(Pname, Ptelephone, Ptype,Prowid)
+function dbUpdate(Pname, Ptelephone, Ptype)
 {
     var db = dbGetHandle()
     db.transaction(function (tx) {
        var results= tx.executeSql(
-                    'update linkman_logorder set name=?, telephone=?,type=? where rowid = ?', [Pname, Ptelephone,Ptype,Prowid])
+                    'update linkman_logorder set name=?, telephone=? where type = ?', [Pname, Ptelephone,Ptype])
     })
 }
+
 function dbDeleteRow(Prowid)
 {
     var db = dbGetHandle()
     db.transaction(function (tx) {
-        tx.executeSql('delete from linkman_logorder where rowid = ?', [Prowid])
-
+        tx.executeSql('delete from linkman_logorder where Prowid = ?', [Prowid])
     })
-
-
 }
 function dbsearch(Ptype){
     var db=dbGetHandle()
     db.transaction(function (tx){
-        var results=tx.executeSql('select rowid,name,telephone,type from linkman_logorder where type = ?',[Ptype])
-        for (var i = 0; i < results.rows.length; i++) {
-            mymodel.append({
-                                 id: results.rows.item(i).rowid,
-//                               checked: " ",
-                                 name: results.rows.item(i).name,
-                                 telephone: results.rows.item(i).telephone,
-                                 type:results.rows.item(i).type
-
-                             })
-        }
-    })
-}
-function dbReadAllagin()
-{
-    var db = dbGetHandle()
-
-    db.transaction(function (tx) {
-        var results = tx.executeSql(
-                    'SELECT rowid,name,telephone,type FROM linkman_logorder order by type desc')
-        for (var i = 0; i < results.rows.length; i++) {
-            mymodel.append({
-                                 id: results.rows.item(i).rowid,
-//                               checked: " ",
-                                 name: results.rows.item(i).name,
-                                 telephone: results.rows.item(i).telephone,
-                                 type:results.rows.item(i).type
-
-                             })
-        }
-
+        tx.executeSql('select from linkman_logorder where Ptype = ?',[Ptype])
     })
 }

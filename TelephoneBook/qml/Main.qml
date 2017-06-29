@@ -6,6 +6,7 @@ App {
 
     onInitTheme: {
         Theme.colors.tintColor = "lightgreen"
+        Theme.colors.textColor = "red"
 
     }
 

@@ -1,6 +1,8 @@
 # allows to add DEPLOYMENTFOLDERS and links to the V-Play library and QtCreator auto-completion
 CONFIG += v-play
 
+QT += androidextras
+
 qmlFolder.source = qml
 DEPLOYMENTFOLDERS += qmlFolder # comment for publishing
 
@@ -47,4 +49,5 @@ HEADERS +=
 
 DISTFILES += \
     qml/Database.js \
-    qml/MyModel.qml
+    qml/MyModel.qml \
+    qml/GroupModel.qml
