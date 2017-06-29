@@ -1,5 +1,4 @@
 import VPlayApps 1.0
-
 Page {
     property alias childNavigationStack: globalNavStack
     property alias navigation: navigation

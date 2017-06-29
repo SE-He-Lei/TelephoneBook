@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
-
+import VPlayApps 1.0
 //Item{
 //    id:keyboardPage
 
@@ -25,13 +25,24 @@ import QtQuick.Layouts 1.1
             focus: false
             visible: false
         }
-            Button{
-                id: deletebutton
-                text: "delete"
-                anchors.left: dialNumber.right
-                anchors.leftMargin: 5
-                onClicked: dialNumber.text = ""
+         Button{
+             id:deletebutton
+             text:"Delete"
+             anchors.right: keyboard.right
+         }
+
+        IconButton{
+            id:phonebutton
+            icon:IconType.phone
+            size:30
+            anchors.right:dialNumber.right
+
+            anchors.rightMargin: 10
+            onClicked: {
+                Qt.openUrlExternally('tel:+',dialNumber.text)
             }
+        }
+
 
         color: "lightgreen"
         GridLayout{

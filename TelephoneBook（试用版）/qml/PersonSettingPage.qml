@@ -11,19 +11,33 @@ Item {
             title: "Setting"
             model: [
                 { text: "My Information", icon: IconType.phone},
-                {text: "Address", icon:IconType.home, /*group:"Connection"*/},
-                {text: "Apperence", icon:IconType.cloud, /*group: "Connection"*/}
+//                {text: "Address", icon:IconType.home, /*group:"Connection"*/},
+//                {text: "Apperence", icon:IconType.cloud, /*group: "Connection"*/},
+                {text:"Mystyle",icon:IconType.android}
             ]
 
             //        section.property: "group"
-            onItemSelected: {
-                navigationStack.popAllExceptFirstAndPush(detailPage)
-            }
+//            onItemSelected: {
+//                navigationStack.popAllExceptFirstAndPush(detailPage)
+//            }
+            delegate: SimpleRow
+                {
+                    onSelected:{
+                        if(index==0){
+                            navigationStack.popAllExceptFirstAndPush(detailPage)
+                        }
+                        if(index==1){
+
+                        }
+                    }
+                }
+
         }
 //        Component.onCompleted: {
 //            JS.dbInit();
 //            JS.dbReadAll();
 //        }
+
 
     }
 
@@ -67,4 +81,12 @@ Item {
             }
         }
     }
+//    Component{
+//        id:setstyle
+////        Page{
+////          rightBarItem: TextButtonBarItem{
+////              text:
+////          }
+////        }
+//    }
 }

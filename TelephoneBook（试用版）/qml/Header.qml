@@ -12,20 +12,22 @@ Page {
                                             numberinput.text)
         listPage.listView.model.setProperty(listPage.listView.currentIndex, "type",nameinput.text.substring(0,1).toUpperCase())
 
+
     }
     function insertrec() {
         var rowid = parseInt(JS.dbInsert(nameinput.text,numberinput.text,nameinput.text.substring(0,1)), 10)
 
-        if (rowid) {
+//        if (rowid) {
             listPage.listView.model.setProperty(listPage.listView.currentIndex, "id", rowid)
             listPage.listView.forceLayout()
-        }
+//        }
         return rowid;
     }
 
     function editrec(Pname, Ptelephone) {
         nameinput.text = Pname
         numberinput.text = Ptelephone
+
 
     }
     function initrec_new(){
@@ -60,21 +62,13 @@ Page {
 
                         if(listPage.listView.currentIndex!=-1){
 
-//                          if(listPage.listView.model.get(listPage.listView.currentIndex).id<1){
-//                              console.log("hhh")
-
                           if(insertrec()){
+                            setlistview()
 
-                              setlistview()
 
-//                          }
                         }
                        }
                         stack.pop(addlinkmanpage)
-//                        editrec(listPage.listView.model.get(listPage.listView.currentIndex).name,
-//                                      listPage.listView.model.get(listPage.listView.currentIndex).phone)
-//                        listPage.listView.model.insert(0,{name:"jessy",telephone:110})
-
                     }
                 }
             }
@@ -91,9 +85,11 @@ Page {
 
             }
             Row{
-                AppText{
-                    text: "Phone:"
-                    height:numberinput.height
+                AppImage{
+                    source:"../assets/telephone.jpg"
+                    width: 40
+                    height: 40
+
                 }
                 AppTextField{
                     id:numberinput
@@ -103,9 +99,9 @@ Page {
             }
         }
     }
-//    Component.onCompleted: {
-//        JS.dbInit()
-//    }
+    Component.onCompleted: {
+        JS.dbInit()
+    }
 }
 
 
